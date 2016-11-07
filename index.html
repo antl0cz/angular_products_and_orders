@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Products with Orders</title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="prod_ord.js"></script>
+    <link rel="stylesheet" href="./Skeleton-2.0.4/css/normalize.css">
+    <link rel="stylesheet" href="./Skeleton-2.0.4/css/skeleton.css">
+</head>
+<body>
+<div class="container">
+    <div ng-controller="productController">
+        <fieldset>
+            <legend>Products Controller</legend>
+            <form ng-submit="create()">
+                <input type="text" ng-model="product.name" placeholder="Enter Product Name">
+                <input type="text" ng-model="product.price" placeholder="Enter Product Price">
+                <input type="submit" value="Add Product">
+            </form>
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody ng-repeat="product in products">
+                <tr>
+                    <td>{{product.name}}</td>
+                    <td>{{product.price | currency: "$"}}</td>
+                    <td><button ng-click="delete($index)">Delete Product</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+    <div ng-controller="orderController">
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="product in products">
+            <tr>
+                <td>{{product.name}}</td>
+                <td>{{product.price | currency: "$"}}</td>
+                <td>{{product.quantity}}</td>
+                <td><button ng-click="update($index)">Buy Product</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
